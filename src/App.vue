@@ -91,14 +91,19 @@
               >
               <span
                 v-on:click="selected = 'misc'"
-                v-bind:class="{ navigation_active: selected == 'other' }"
+                v-bind:class="{ navigation_active: selected == 'misc' }"
                 >Misc
               </span>
               <span
+                v-on:click="selected = 'test'"
+                v-bind:class="{ navigation_active: selected == 'test' }"
+                >Tests</span
+              >
+              <span
                 class="nav_small"
-                v-on:click="selected = 's&c'"
-                v-bind:class="{ navigation_active: selected == 's&c' }"
-                >Scope <br />& Closure</span
+                v-on:click="selected = 'interview'"
+                v-bind:class="{ navigation_active: selected == 'interview' }"
+                >Interview</span
               >
             </nav>
 
@@ -298,14 +303,16 @@ body {
 .navigation {
   font-size: 38px;
   display: flex;
-  margin-right: 97px;
+  margin-right: 31px;
+  flex-wrap: wrap;
+  /* width: 800px; */
 }
 
 .navigation span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 170px;
+  width: 150px;
   height: 68px;
   border: 4px inset #c8a207;
   border-bottom: none;
