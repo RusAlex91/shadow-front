@@ -58,7 +58,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 /* animations */
 /* .fade-enter-active {
   overflow: hidden;
@@ -81,7 +81,8 @@ export default {
   border-left: 4px solid #c8a207;
   border-right: 4px solid #c8a207;
   border-top: 4px solid #c8a207;
-  width: 1000px;
+
+  font-family: AnonymousPro;
 
   /* margin-left: 25px; */
   /* background: rgb(118, 101, 35); */

@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="main-text-box">
+    <div class="main-text-box main-text-box_color">
       <div
         v-show="searchText.length < 5"
         v-for="qa in searchText"
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
 /* animations */
 .fade-enter-active,
 .fade-leave-active {
@@ -63,11 +63,15 @@ export default {
 /*  */
 
 .main-text-box {
-  width: 1000px;
-  color: rgba(127, 255, 212, 0.863);
+  font-family: AnonymousPro;
+
   /* margin-left: 25px; */
   /* background: rgb(118, 101, 35); */
   /* background: linear-gradient(184deg, rgba(118, 101, 35, 0.5) 0%, rgba(118, 101, 35, 0.21332282913165268) 100%); */
+}
+
+.main-text-box_color {
+  color: rgba(127, 255, 212, 0.863);
 }
 
 .middle-text-container {
@@ -83,26 +87,6 @@ export default {
 
 .question-answer-box_question:hover {
   border-bottom: 1px solid rgba(127, 255, 212, 0.863);
-}
-
-.question-answer-box_answer {
-}
-
-.question-answer-box {
-  position: relative;
-  margin-left: 20px;
-  font-size: 24px;
-}
-
-.code-box {
-  border: 4px double #493b05;
-  width: 50%;
-}
-
-.code-box-code {
-  font-size: 24px;
-  display: block;
-  margin: 20px;
 }
 
 .question-answer-box_close {

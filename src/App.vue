@@ -4,7 +4,7 @@
       <div class="flex-wrapper">
         <transition name="type">
           <div class="main-container">
-            <pre>
+            <pre class="pre-above-1024">
 
    ____    ____     _____       _____ _    _          _____   ______          __  ______ _____   ____  _   _ _______ 
   |  _ \  |  _ \   / ____|     / ____| |  | |   /\   |  __ \ / __ \ \        / / |  ____|  __ \ / __ \| \ | |__   __|
@@ -17,6 +17,47 @@
            
                 </pre
             >
+
+            <pre class="pre-below-1024">
+    ____  ____ _____    _____ __  _____    ____  ____ _       __   __________  ____  _   ________
+   / __ )/ __ ) ___/   / ___// / / /   |  / __ \/ __ \ |     / /  / ____/ __ \/ __ \/ | / /_  __/
+  / __  / __  \__ \    \__ \/ /_/ / /| | / / / / / / / | /| / /  / /_  / /_/ / / / /  |/ / / /   
+ / /_/ / /_/ /__/ /   ___/ / __  / ___ |/ /_/ / /_/ /| |/ |/ /  / __/ / _, _/ /_/ / /|  / / /    
+/_____/_____/____/   /____/_/ /_/_/  |_/_____/\____/ |__/|__/  /_/   /_/ |_|\____/_/ |_/ /_/     
+                                                                                                 </pre
+            >
+            <pre class="pre-below-800">
+ __   __   __      __             __   __           ___  __   __       ___ 
+|__) |__) /__`    /__` |__|  /\  |  \ /  \ |  |    |__  |__) /  \ |\ |  |  
+|__) |__) .__/    .__/ |  | /~~\ |__/ \__/ |/\|    |    |  \ \__/ | \|  |  
+                                                                           </pre
+            >
+
+            <pre class="pre-below-600">
+ __   __   __                                    
+|__) |__) (_                                     
+|__) |__) __)                                    
+         __            __   __                   
+        (_  |__|  /\  |  \ /  \ |  |             
+        __) |  | /--\ |__/ \__/ |/\|             
+                           __  __   __       ___ 
+                          |_  |__) /  \ |\ |  |  
+                          |   | \  \__/ | \|  |  
+                                                 </pre
+            >
+
+            <pre class="pre-below-320">
+ __   __   __                  
+|__) |__) (_                   
+|__) |__) __)                  
+ __            __   __         
+(_  |__|  /\  |  \ /  \ |  |   
+__) |  | /--\ |__/ \__/ |/\|   
+ __  __   __       ___         
+|_  |__) /  \ |\ |  |          
+|   | \  \__/ | \|  |          
+                               
+            </pre>
             <div class="header-underline">
               __________________________________________________________
             </div>
@@ -185,6 +226,11 @@ export default {
   src: url(fonts/Glass_TTY_VT220.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: AnonymousPro;
+  src: url(fonts/AnonymousPro-Regular.ttf) format("truetype");
+}
+
 #app {
   background-color: #0a0600;
 }
@@ -345,5 +391,339 @@ body {
   padding: 10px;
 
   outline: none;
+}
+@media only screen and (max-width: 349px) and (min-width: 260px) {
+  .pre-above-1024 {
+    display: none;
+  }
+  .pre-below-600 {
+    display: none;
+  }
+
+  .pre-below-1024 {
+    display: none;
+  }
+
+  .pre-below-800 {
+    display: none;
+  }
+
+  .pre-below-320 {
+    margin-bottom: 60px;
+  }
+  .header-underline {
+    font-size: 9px;
+    margin-right: 6px;
+  }
+  .greeting-box {
+    font-size: 9px;
+  }
+  .message-1 {
+    margin-bottom: 0px;
+  }
+  .greeting-box_message-wrapper {
+    font-size: 9px;
+  }
+
+  .middle-text-container {
+    font-size: 10px;
+  }
+  .greeting-box_right-border {
+    left: 95.6%;
+    top: 8px;
+  }
+  .greeting-box_bottomline {
+    margin-top: 7px;
+  }
+  .main-container {
+    background-color: #0a0600;
+  }
+  .navigation {
+    font-size: 24px;
+    flex-wrap: wrap;
+    width: 200px;
+    margin-right: 21px;
+  }
+
+  .navigation span {
+    width: 300px;
+    height: 60px;
+
+    border-bottom: none;
+    margin-left: 3px;
+    border: 2px inset #c8a207;
+    border-bottom: 2px inset #c8a207;
+    margin-top: 5px;
+  }
+  .main-text-box {
+    width: 300px;
+    border-left: 2px solid #c8a207;
+    border-right: 2px solid #c8a207;
+    border-top: 2px solid #c8a207;
+  }
+  .question-answer-box {
+    font-size: 18px;
+    margin-right: 2px;
+  }
+
+  .question-answer-box_answer {
+    font-size: 14px;
+  }
+  .code-box {
+    font-size: 16px;
+    width: 90%;
+  }
+  .code-box-code {
+    font-size: 16px;
+  }
+  .question-answer-box_close {
+    font-size: 16px;
+  }
+
+  .search_input {
+    font-size: 16px;
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 600px) and (min-width: 350px) {
+  .pre-above-1024 {
+    display: none;
+  }
+  .pre-below-600 {
+    margin-bottom: 40px;
+  }
+
+  .pre-below-1024 {
+    display: none;
+  }
+
+  .pre-below-800 {
+    display: none;
+  }
+
+  .pre-below-320 {
+    display: none;
+  }
+  .header-underline {
+    font-size: 12px;
+    margin-right: 12px;
+  }
+  .greeting-box {
+    font-size: 12px;
+  }
+  .message-1 {
+    margin-bottom: 5px;
+  }
+  .greeting-box_message-wrapper {
+    font-size: 16px;
+  }
+
+  .middle-text-container {
+    font-size: 14px;
+  }
+  .greeting-box_right-border {
+    left: 95.6%;
+    top: 15px;
+  }
+  .greeting-box_bottomline {
+    margin-top: 7px;
+  }
+  .main-container {
+    background-color: #0a0600;
+  }
+  .navigation {
+    font-size: 28px;
+    flex-wrap: wrap;
+    width: 300px;
+    margin-right: 21px;
+  }
+
+  .navigation span {
+    width: 300px;
+    height: 60px;
+
+    border-bottom: none;
+    margin-left: 3px;
+    border: 2px inset #c8a207;
+    border-bottom: 2px inset #c8a207;
+    margin-top: 5px;
+  }
+  .main-text-box {
+    width: 320px;
+    border-left: 2px solid #c8a207;
+    border-right: 2px solid #c8a207;
+    border-top: 2px solid #c8a207;
+  }
+  .question-answer-box {
+    font-size: 18px;
+    margin-right: 2px;
+  }
+
+  .question-answer-box_answer {
+    font-size: 14px;
+  }
+  .code-box {
+    font-size: 16px;
+    width: 90%;
+  }
+  .code-box-code {
+    font-size: 16px;
+  }
+  .question-answer-box_close {
+    font-size: 16px;
+  }
+
+  .search_input {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 800px) and (min-width: 601px) {
+  .pre-above-1024 {
+    display: none;
+  }
+  .pre-below-600 {
+    display: none;
+  }
+
+  .pre-below-1024 {
+    display: none;
+  }
+
+  .pre-below-800 {
+  }
+
+  .pre-below-320 {
+    display: none;
+  }
+
+  .header-underline {
+    font-size: 20px;
+    margin-right: 20px;
+  }
+  .greeting-box {
+    font-size: 20px;
+  }
+  .message-1 {
+    margin-bottom: 15px;
+  }
+  .greeting-box_message-wrapper {
+    font-size: 20px;
+  }
+  .greeting-box_right-border {
+    left: 95.6%;
+    top: 23px;
+  }
+  .main-container {
+    background-color: #0a0600;
+  }
+  .navigation {
+    font-size: 24px;
+    flex-wrap: wrap;
+    width: 600px;
+    margin-right: 21px;
+  }
+
+  .navigation span {
+    width: 290px;
+    height: 60px;
+
+    border-bottom: none;
+    margin-left: 3px;
+    border: 2px inset #c8a207;
+    border-bottom: 2px inset #c8a207;
+    margin-top: 5px;
+  }
+  .main-text-box {
+    width: 600px;
+    border-left: 2px solid #c8a207;
+    border-right: 2px solid #c8a207;
+    border-top: 2px solid #c8a207;
+  }
+
+  .search_input {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 1023px) and (min-width: 801px) {
+  .pre-below-1024 {
+  }
+  .pre-above-1024 {
+    display: none;
+  }
+  .pre-below-600 {
+    display: none;
+  }
+
+  .pre-below-800 {
+    display: none;
+  }
+  .pre-below-320 {
+    display: none;
+  }
+  .header-underline {
+    font-size: 24px;
+    margin-right: 20px;
+  }
+  .greeting-box {
+    font-size: 24px;
+  }
+  .greeting-box_right-border {
+    left: 95.6%;
+  }
+  .main-container {
+    background-color: #0a0600;
+  }
+  .navigation {
+    font-size: 24px;
+    flex-wrap: wrap;
+    width: 800px;
+    margin-right: 21px;
+  }
+
+  .navigation span {
+    width: 240px;
+    height: 60px;
+    border: 4px inset #c8a207;
+    border-bottom: none;
+    margin-left: 7px;
+    border: 4px inset #c8a207;
+    border-bottom: 4px inset #c8a207;
+    margin-top: 5px;
+  }
+  .main-text-box {
+    width: 800px;
+  }
+
+  .search_input {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .pre-above-1024 {
+  }
+
+  .main-text-box {
+    width: 1000px;
+  }
+
+  .pre-below-1024 {
+    display: none;
+  }
+
+  .pre-below-600 {
+    display: none;
+  }
+
+  .pre-below-800 {
+    display: none;
+  }
+
+  .pre-below-320 {
+    display: none;
+  }
 }
 </style>
