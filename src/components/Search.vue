@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="main-text-box main-text-box_color">
+    <div class="main-text-box main-text-box_color" v-if="searhHidden">
       <div
         v-show="searchText.length < 5"
         v-for="qa in searchText"
@@ -16,9 +16,15 @@
           <p class="question-answer-box_answer">
             {{ qa.answer }}
           </p>
-          <div class="code-box">
+          <div class="code-box" v-if="qa.code != ''">
             <span class="code-box-code" v-html="qa.code"> </span>
           </div>
+
+          <div class="links" v-for="link in qa.links" :key="link">
+            <span class="sourceLinks">- </span>
+            <a v-bind:href="link.link" class="link">{{ link.title }}</a>
+          </div>
+          <span class="extra"> Дополнительно: {{ qa.extra }} </span>
           <p class="question-answer-box_close" @click="openbox(qa)">Закрыть</p>
         </div>
       </div>
@@ -26,11 +32,12 @@
   </transition>
 </template>
 
-<script>
+<script >
 export default {
   name: "HelloWorld",
   props: {
     searchText: {},
+    searhHidden: Boolean,
   },
   data() {
     return {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="bg-theme">
+    <div class="bg-theme startAnimation">
       <div class="flex-wrapper">
         <transition name="type">
           <div class="main-container">
@@ -30,7 +30,7 @@
  __   __   __      __             __   __           ___  __   __       ___ 
 |__) |__) /__`    /__` |__|  /\  |  \ /  \ |  |    |__  |__) /  \ |\ |  |  
 |__) |__) .__/    .__/ |  | /~~\ |__/ \__/ |/\|    |    |  \ \__/ | \|  |  
-                                                                           </pre
+ </pre
             >
 
             <pre class="pre-below-600">
@@ -98,16 +98,25 @@ __) |  | /--\ |__/ \__/ |/\|
 
               <p>You can search database</p>
             </div>
-            <input
-              @click="serachInput = ''"
-              type="text"
-              v-model="serachInput"
-              class="search_input"
-            />
-
+            <div class="search-Input-Wrapper">
+              <input
+                @click="
+                  serachInput = '';
+                  searhHidden = true;
+                "
+                type="text"
+                v-model="serachInput"
+                class="search_input"
+              />
+              <button
+                class="query-Close-Button"
+                @click="searhHidden = false"
+              ></button>
+            </div>
             <Search
               class="searchComponent"
               :searchText="searchFiltered()"
+              :searhHidden="searhHidden"
             ></Search>
             <div class="middle-text-container">
               <p>or</p>
@@ -170,6 +179,7 @@ export default {
 
       show: false,
       serachInput: "_",
+      searhHidden: false,
     };
   },
   components: {
@@ -236,14 +246,14 @@ export default {
 }
 
 /* Animation */
-.type-enter-active,
+/* .type-enter-active,
 .type-enter,
 .type-leave-active,
 .type-leave-to {
   overflow: hidden;
   -webkit-animation: typingGeneral 4s steps(50, end);
-  /* animation: typingGeneral 3s steps(50, end); */
-}
+   animation: typingGeneral 3s steps(50, end); 
+} */
 
 @-webkit-keyframes typingGeneral {
   from {
@@ -255,10 +265,8 @@ export default {
 }
 
 .startAnimation {
-  white-space: nowrap;
-  overflow: hidden;
-  -webkit-animation: typing 6s steps(50, end);
-  animation: typingGeneral 6s steps(50, end);
+  -webkit-animation: typing 1.5s steps(50, end);
+  animation: typingGeneral 1.5s steps(50, end);
 }
 
 /*  */
@@ -344,6 +352,60 @@ body {
   display: flex;
   flex-direction: column;
   max-width: 500px;
+}
+
+.search-Input-Wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  /* cursor: default; */
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-appearance: button; /* for input */
+  -webkit-user-select: none; /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  outline: none;
+}
+
+.query-Close-Button {
+  position: absolute;
+  right: -42px;
+  top: 5px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.query-Close-Button:hover {
+  opacity: 1;
+}
+.query-Close-Button:before,
+.query-Close-Button:after {
+  position: absolute;
+  left: 15px;
+  top: 1px;
+  content: "";
+  height: 33px;
+  width: 3px;
+  background-color: tomato;
+}
+.query-Close-Button:before {
+  transform: rotate(45deg);
+}
+.query-Close-Button:after {
+  transform: rotate(-45deg);
+}
+.query-Close-Button:after:hover {
+  transition: all 0.1s;
+  background-color: red;
 }
 
 .navigation {
@@ -506,11 +568,11 @@ body {
     display: none;
   }
   .header-underline {
-    font-size: 12px;
+    font-size: 11px;
     margin-right: 12px;
   }
   .greeting-box {
-    font-size: 12px;
+    font-size: 11px;
   }
   .message-1 {
     margin-bottom: 5px;
@@ -592,6 +654,7 @@ body {
   }
 
   .pre-below-800 {
+    height: 40px;
   }
 
   .pre-below-320 {

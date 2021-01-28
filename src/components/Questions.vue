@@ -15,9 +15,15 @@
           <p class="question-answer-box_answer">
             {{ qa.answer }}
           </p>
-          <div class="code-box">
+          <div class="code-box" v-if="qa.code != ''">
             <span class="code-box-code" v-html="qa.code"> </span>
           </div>
+
+          <div class="links" v-for="link in qa.links" :key="link">
+            <span class="sourceLinks">- </span>
+            <a v-bind:href="link.link" class="link">{{ link.title }}</a>
+          </div>
+          <span class="extra"> Дополнительно: {{ qa.extra }} </span>
           <p class="question-answer-box_close" @click="openbox(qa)">Закрыть</p>
         </div>
       </transition>
@@ -126,5 +132,11 @@ export default {
 
 .question-answer-box_close {
   cursor: pointer;
+  font-size: 18px;
+  color: tomato;
+}
+
+.links {
+  margin-bottom: 10px;
 }
 </style>
