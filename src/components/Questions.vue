@@ -1,37 +1,55 @@
 <template>
   <div class="main-text-box">
-    <div v-for="qa in qaText" :key="qa.id" class="question-answer-box">
-      <p
-        @click="
-          openbox(qa);
-          scrollToElement({ behavior: 'smooth' });
-        "
-        class="question-answer-box_question"
-      >
-        >>> {{ qa.question }}
-      </p>
-      <transition name="fade">
-        <div v-show="qa.seen">
-          <p class="question-answer-box_answer">
-            {{ qa.answer }}
-          </p>
-          <div class="code-box" v-if="qa.code != ''">
-            <span class="code-box-code" v-html="qa.code"> </span>
-          </div>
+    <input
+      type="checkbox"
+      id="validated"
+      value="valid"
+      v-model="admin_Invalidated"
+    />
 
-          <div class="links" v-for="link in qa.links" :key="link">
-            <span class="sourceLinks">- </span>
-            <a v-bind:href="link.link" class="link">{{ link.title }}</a>
+    <label class="validated_label" for="validated"
+      >Показать присланные вопросы</label
+    >
+    <div v-for="qa in qaText" :key="qa.id" class="question-answer-box">
+      <div
+        class="validationIf"
+        v-if="admin_Invalidated == qa.admin_Invalidated"
+      >
+        <p
+          @click="
+            openbox(qa);
+            scrollToElement({ behavior: 'smooth' });
+          "
+          class="question-answer-box_question"
+        >
+          >>> {{ qa.question }}
+        </p>
+        <transition name="fade">
+          <div v-show="qa.seen">
+            <p class="question-answer-box_answer">
+              {{ qa.answer }}
+            </p>
+            <div class="code-box" v-if="qa.code != ''">
+              <span class="code-box-code" v-html="qa.code"> </span>
+            </div>
+
+            <div class="links" v-for="link in qa.links" :key="link">
+              <span class="sourceLinks">- </span>
+              <a v-bind:href="link.link" class="link">{{ link.title }}</a>
+            </div>
+            <span class="extra"> Дополнительно: {{ qa.extra }} </span>
+            <p class="question-answer-box_close" @click="openbox(qa)">
+              Закрыть
+            </p>
           </div>
-          <span class="extra"> Дополнительно: {{ qa.extra }} </span>
-          <p class="question-answer-box_close" @click="openbox(qa)">Закрыть</p>
-        </div>
-      </transition>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+//успешно замена на qaQuest, нужен другой компонент для отправленных через "форму"
 export default {
   name: "HelloWorld",
   props: {
@@ -43,9 +61,29 @@ export default {
       answerHidden: false,
       // message: `hello my ${HtmlAnswers[0].question}!`,
       dynamicList: [],
+      qaQuest: [],
+      admin_Invalidated: false,
     };
   },
   computed: {},
+
+  created() {
+    this.$http
+      .get("https://vue-http-e8d07.firebaseio.com/messages.json")
+      .then(function (data) {
+        return data.json();
+      })
+      .then(function (data) {
+        var questArr = [];
+        for (let key in data) {
+          data[key].id = key;
+          data[key].userCreated = true;
+          questArr.push(data[key]);
+        }
+        console.log(questArr);
+        this.qaQuest = questArr;
+      });
+  },
   methods: {
     openbox: function (questionSeen) {
       questionSeen.seen = !questionSeen.seen;
@@ -93,6 +131,15 @@ export default {
   /* margin-left: 25px; */
   /* background: rgb(118, 101, 35); */
   /* background: linear-gradient(184deg, rgba(118, 101, 35, 0.5) 0%, rgba(118, 101, 35, 0.21332282913165268) 100%); */
+}
+
+#validated {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.validated_label {
+  margin-left: 5px;
 }
 
 .middle-text-container {

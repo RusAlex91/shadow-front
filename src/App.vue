@@ -118,6 +118,7 @@ __) |  | /--\ |__/ \__/ |/\|
               :searchText="searchFiltered()"
               :searhHidden="searhHidden"
             ></Search>
+
             <div class="middle-text-container">
               <p>or</p>
               <p>Navigate through menu below:</p>
@@ -146,18 +147,25 @@ __) |  | /--\ |__/ \__/ |/\|
               </span>
               <span
                 v-on:click="selected = 'test'"
-                v-bind:class="{ navigation_active: selected == 'test' }"
+                v-bind:class="{
+                  navigation_active: selected == 'test',
+                  test_deco: true,
+                }"
                 >Tests</span
               >
               <span
                 class="nav_small"
                 v-on:click="selected = 'interview'"
-                v-bind:class="{ navigation_active: selected == 'interview' }"
+                v-bind:class="{
+                  navigation_active: selected == 'interview',
+                  interview_deco: true,
+                }"
                 >Interview</span
               >
             </nav>
 
             <Questions :qaText="filteredAnswers()"></Questions>
+            <Form></Form>
           </div>
         </transition>
       </div>
@@ -168,6 +176,7 @@ __) |  | /--\ |__/ \__/ |/\|
 <script>
 import Questions from "./components/Questions.vue";
 import Search from "./components/Search.vue";
+import Form from "./components/Form";
 import Answers from "./assets/Answers";
 
 export default {
@@ -185,6 +194,7 @@ export default {
   components: {
     Questions,
     Search,
+    Form,
   },
   methods: {
     toggleMenu: function () {
@@ -431,6 +441,13 @@ button {
   margin-top: 20px;
 }
 
+.test_deco {
+  color: brown;
+}
+
+.interview_deco {
+  color: brown;
+}
 .navigation span:hover {
   color: tomato;
 }
