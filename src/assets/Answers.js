@@ -1,7 +1,7 @@
 export default [{
         id: 1,
         type: "html",
-        admin_Invalidated: true,
+        user_send: true,
         question: "Что такое Doctype? Для чего он нужен?",
         answer: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
    tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
@@ -14,7 +14,7 @@ export default [{
     },
     {
         id: 2,
-        admin_Invalidated: false,
+        user_send: false,
         type: "html",
         question: "Для чего используется data- атрибуты?",
         answer: `Позволяет сохранять информацию в DOM, можно писать валидный HTML с встроенным в него приватным атрибутом`,

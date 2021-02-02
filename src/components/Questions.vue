@@ -1,20 +1,12 @@
 <template>
   <div class="main-text-box">
-    <input
-      type="checkbox"
-      id="validated"
-      value="valid"
-      v-model="admin_Invalidated"
-    />
+    <input type="checkbox" id="validated" value="valid" v-model="user_send" />
 
     <label class="validated_label" for="validated"
       >Показать присланные вопросы</label
     >
     <div v-for="qa in qaText" :key="qa.id" class="question-answer-box">
-      <div
-        class="validationIf"
-        v-if="admin_Invalidated == qa.admin_Invalidated"
-      >
+      <div class="validationIf" v-if="user_send == qa.user_send">
         <p
           @click="
             openbox(qa);
@@ -62,7 +54,7 @@ export default {
       // message: `hello my ${HtmlAnswers[0].question}!`,
       dynamicList: [],
       qaQuest: [],
-      admin_Invalidated: false,
+      user_send: false,
     };
   },
   computed: {},
@@ -158,6 +150,7 @@ export default {
 }
 
 .question-answer-box_answer {
+  font-size: 20px;
 }
 
 .question-answer-box {
@@ -180,10 +173,23 @@ export default {
 .question-answer-box_close {
   cursor: pointer;
   font-size: 18px;
+  color: #c8a207;
+  background-color: rgba(134, 113, 26, 0.3);
+  border: 2px solid #c8a207;
+  text-align: center;
+  width: 100px;
+}
+
+.question-answer-box_close:hover {
   color: tomato;
 }
 
 .links {
   margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.extra {
+  font-size: 20px;
 }
 </style>

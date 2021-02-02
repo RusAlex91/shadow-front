@@ -265,7 +265,7 @@ export default {
    animation: typingGeneral 3s steps(50, end); 
 } */
 
-@-webkit-keyframes typingGeneral {
+/* @-webkit-keyframes typingGeneral {
   from {
     width: 0;
   }
@@ -277,7 +277,7 @@ export default {
 .startAnimation {
   -webkit-animation: typing 1.5s steps(50, end);
   animation: typingGeneral 1.5s steps(50, end);
-}
+} */
 
 /*  */
 
