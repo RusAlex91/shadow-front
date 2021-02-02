@@ -5,10 +5,10 @@
       <form class="contact-form" @submit.prevent="saveContactMessage">
         <label for="qa_group">Выберите категорию вопроса:</label>
         <select class="qa_group" required v-model="qa_group">
-          <option>HTML</option>
-          <option>CSS</option>
-          <option>JS</option>
-          <option>Misc</option>
+          <option>html</option>
+          <option>css</option>
+          <option>js</option>
+          <option>misc</option>
         </select>
         <div
           class="form-control_question"
@@ -83,7 +83,11 @@
           <p v-if="validate_answer_second === 'invalid'">Введите ответ</p>
 
           <label class="textarea_code-label" for="textarea_code">Код:</label>
-          <textarea placeholder="" class="textarea_code"></textarea>
+          <textarea
+            placeholder=""
+            class="textarea_code"
+            v-model="code_second"
+          ></textarea>
 
           <p v-if="validate_answer_second === 'invalid'">
             Опционально введите код
@@ -118,7 +122,11 @@
           <p v-if="validate_answer_third === 'invalid'">Введите ответ</p>
 
           <label class="textarea_code-label" for="textarea_code">Код:</label>
-          <textarea placeholder="" class="textarea_code"></textarea>
+          <textarea
+            placeholder=""
+            class="textarea_code"
+            v-model="code_third"
+          ></textarea>
 
           <p v-if="validate_answer_third === 'invalid'">
             Опционально введите код
@@ -153,7 +161,11 @@
           <p v-if="validate_answer_fourth === 'invalid'">Введите ответ</p>
 
           <label class="textarea_code-label" for="textarea_code">Код:</label>
-          <textarea placeholder="" class="textarea_code"></textarea>
+          <textarea
+            placeholder=""
+            class="textarea_code"
+            v-model="code_fourth"
+          ></textarea>
 
           <p v-if="validate_answer_fourth === 'invalid'">
             Опционально введите код
@@ -311,18 +323,20 @@
 </template>
 
 <script>
-// import func from "../../vue-temp/vue-editor-bridge";
 export default {
   data() {
     return {
       message: null,
-      qa_group: "Misc",
+      qa_group: "",
       question: "",
       answer: "",
       answer_second: "",
       answer_third: "",
       answer_fourth: "",
       code: "",
+      code_second: "",
+      code_third: "",
+      code_fourth: "",
       extra: "",
       link_desc: "",
       link: "",
@@ -335,15 +349,19 @@ export default {
       link_desc_fifth: "",
       link_fifth: "",
 
-      submit_allow: true,
+      submit_allow: false,
+
       moreA: false,
       moreB: false,
       moreC: false,
+
       linkA: false,
       linkB: false,
       linkC: false,
       linkD: false,
+
       isLink: true,
+
       add_link_isPressed: false,
       add_link_isPressedA: false,
       add_link_isPressedB: false,
@@ -353,8 +371,8 @@ export default {
       add_answer_isPressedA: false,
       add_answer_isPressedB: false,
       add_answer_isPressedC: false,
-      validate_question: "pending",
 
+      validate_question: "pending",
       validate_answer: "pending",
       validate_answer_second: "pending",
       validate_answer_third: "pending",
@@ -365,7 +383,7 @@ export default {
   methods: {
     saveContactMessage: function (e) {
       e.preventDefault();
-      const messagesRef = this.$firebaseDatabase.collection("message");
+      const messagesRef = this.$firebaseDatabase.collection("qa");
       messagesRef.add({
         qa_group: this.qa_group,
         question: this.question,
@@ -374,6 +392,9 @@ export default {
         answer_third: this.answer_third,
         answer_fourth: this.answer_fourth,
         code: this.code,
+        code_second: "",
+        code_third: "",
+        code_fourth: "",
         extra: this.extra,
         link_desc: this.link_desc,
         link: this.link,
@@ -385,6 +406,8 @@ export default {
         link_fourth: this.link_fourth,
         link_desc_fifth: this.link_desc_fifth,
         link_fifth: this.link_fifth,
+        user_send: true,
+        seen: false,
       });
       (this.qa_group = "Misc"),
         (this.question = ""),
@@ -393,6 +416,9 @@ export default {
         (this.answer_third = ""),
         (this.answer_fourth = ""),
         (this.code = ""),
+        (this.code_second = ""),
+        (this.code_third = ""),
+        (this.code_fourth = ""),
         (this.extra = ""),
         (this.link_desc = ""),
         (this.link = ""),
@@ -404,8 +430,24 @@ export default {
         (this.link_fourth = ""),
         (this.link_desc_fifth = ""),
         (this.link_fifth = ""),
-        (this.submitted = true);
-      this.snackbar = false;
+        (this.submit_allow = false),
+        (this.moreA = false),
+        (this.moreB = false),
+        (this.moreC = false),
+        (this.linkA = false),
+        (this.linkB = false),
+        (this.linkC = false),
+        (this.linkD = false),
+        (this.add_link_isPressed = false),
+        (this.add_link_isPressedA = false),
+        (this.add_link_isPressedB = false),
+        (this.add_link_isPressedC = false),
+        (this.add_link_isPressedD = false),
+        (this.add_answer_isPressed = false),
+        (this.add_answer_isPressedA = false),
+        (this.add_answer_isPressedB = false),
+        (this.add_answer_isPressedC = false),
+        (this.snackbar = false);
     },
     validate_question_input: function () {
       if (this.question.trim() === "") {

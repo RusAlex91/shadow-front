@@ -177,15 +177,15 @@ __) |  | /--\ |__/ \__/ |/\|
 import Questions from "./components/Questions.vue";
 import Search from "./components/Search.vue";
 import Form from "./components/Form";
-import Answers from "./assets/Answers";
+// import Answers from "./assets/Answers";
 
 export default {
   name: "App",
   data() {
     return {
       selected: "html",
-      answers: Answers || 0,
-
+      // answers: Answers || 0,
+      answers: [],
       show: false,
       serachInput: "_",
       searhHidden: false,
@@ -224,7 +224,7 @@ export default {
     filteredAnswers: function () {
       var qatype = this.selected;
       return this.answers.filter(function (item) {
-        return item.type == qatype;
+        return item.qa_group == qatype;
       });
     },
     searchFiltered: function () {
@@ -236,6 +236,40 @@ export default {
         );
       });
     },
+  },
+  created() {
+    // this.$http
+    //   .get("https://shadow-front-40495.firebaseio.com/qa.json")
+    //   .then(function (data) {
+    //     return data.json();
+    //   })
+    //   .then(function (data) {
+    //     var questArr = [];
+    //     for (let key in data) {
+    //       data[key].id = key;
+    //       data[key].userCreated = true;
+    //       questArr.push(data[key]);
+    //     }
+    //     console.log(questArr);
+    //     this.qaQuest = questArr;
+    //   });
+
+    this.$firebaseDatabase
+      .collection("qa")
+      .get()
+      .then((querySnapshot) => {
+        var arrayQ = [];
+        querySnapshot.forEach((doc) => {
+          var key = doc.id;
+          console.log(key);
+          var arr = doc.data();
+          arr.id = key;
+
+          arrayQ.push(arr);
+        });
+        this.answers = arrayQ;
+        console.log(arrayQ);
+      });
   },
 };
 </script>

@@ -22,12 +22,59 @@
               {{ qa.answer }}
             </p>
             <div class="code-box" v-if="qa.code != ''">
-              <span class="code-box-code" v-html="qa.code"> </span>
+              <span class="code-box-code">{{ qa.code }} </span>
+            </div>
+            <p class="question-answer-box_answer">
+              {{ qa.answer_second }}
+            </p>
+            <div class="code-box" v-if="qa.code_second != ''">
+              <span class="code-box-code"> {{ qa.code_second }} </span>
+            </div>
+            <p class="question-answer-box_answer">
+              {{ qa.answer_third }}
+            </p>
+            <div class="code-box" v-if="qa.code_third != ''">
+              <span class="code-box-code"> {{ qa.code_third }} </span>
+            </div>
+            <p class="question-answer-box_answer">
+              {{ qa.answer_fourth }}
+            </p>
+            <div class="code-box" v-if="qa.code_fourth != ''">
+              <span class="code-box-code">{{ qa.code_fourth }} </span>
             </div>
 
-            <div class="links" v-for="link in qa.links" :key="link">
-              <span class="sourceLinks">- </span>
-              <a v-bind:href="link.link" class="link">{{ link.title }}</a>
+            <div class="links">
+              <div class="link_wrapper" v-if="qa.link_desc != ''">
+                <span class="sourceLinks">- </span>
+                <a v-bind:href="qa.link" class="link">{{ qa.link_desc }}</a>
+              </div>
+              <div class="link_wrapper" v-if="qa.link_desc_second != ''">
+                <span class="sourceLinks">- </span>
+                <a v-bind:href="qa.link_second" class="link">{{
+                  qa.link_desc_second
+                }}</a>
+              </div>
+
+              <div class="link_wrapper" v-if="qa.link_desc_third != ''">
+                <span class="sourceLinks">- </span>
+                <a v-bind:href="qa.link_third" class="link">{{
+                  qa.link_desc_third
+                }}</a>
+              </div>
+
+              <div class="link_wrapper" v-if="qa.link_desc_fourth != ''">
+                <span class="sourceLinks">- </span>
+                <a v-bind:href="qa.link_fourth" class="link">{{
+                  qa.link_desc_fourth
+                }}</a>
+              </div>
+
+              <div class="link_wrapper" v-if="qa.link_desc_fifth != ''">
+                <span class="sourceLinks">- </span>
+                <a v-bind:href="qa.link_fifth" class="link">{{
+                  qa.link_desc_fifth
+                }}</a>
+              </div>
             </div>
             <span class="extra"> Дополнительно: {{ qa.extra }} </span>
             <p class="question-answer-box_close" @click="openbox(qa)">
@@ -59,23 +106,6 @@ export default {
   },
   computed: {},
 
-  created() {
-    this.$http
-      .get("https://vue-http-e8d07.firebaseio.com/messages.json")
-      .then(function (data) {
-        return data.json();
-      })
-      .then(function (data) {
-        var questArr = [];
-        for (let key in data) {
-          data[key].id = key;
-          data[key].userCreated = true;
-          questArr.push(data[key]);
-        }
-        console.log(questArr);
-        this.qaQuest = questArr;
-      });
-  },
   methods: {
     openbox: function (questionSeen) {
       questionSeen.seen = !questionSeen.seen;
@@ -168,6 +198,9 @@ export default {
   font-size: 24px;
   display: block;
   margin: 20px;
+  margin-left: 15px;
+  white-space: pre-line;
+  line-height: 120%;
 }
 
 .question-answer-box_close {
@@ -185,11 +218,22 @@ export default {
 }
 
 .links {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
+  margin-top: 10px;
   font-size: 20px;
 }
 
-.extra {
+.links a {
+  color: #ddb40e;
+}
+
+.links a:visited {
+  color: #776006;
+}
+
+.link .extra {
   font-size: 20px;
 }
 </style>
