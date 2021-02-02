@@ -197,13 +197,18 @@
         </button>
         <div class="link_group" v-if="linkA">
           <label for="input_link_desc">Описание ссылки:</label>
-          <input placeholder="MDN" type="text" class="input_link_desc" />
+          <input
+            placeholder="MDN"
+            type="text"
+            class="input_link_desc"
+            v-model="link_desc_second"
+          />
           <label for="input_link">Ссылка:</label>
           <input
             placeholder="https://developer.mozilla.org/"
             type="text"
             class="input_link"
-            v-model="link"
+            v-model="link_second"
           />
           <button
             type="button"
@@ -223,12 +228,18 @@
 
         <div class="link_group" v-if="linkB">
           <label for="input_link_desc">Описание ссылки:</label>
-          <input placeholder="MDN" type="text" class="input_link_desc" />
+          <input
+            placeholder="MDN"
+            type="text"
+            class="input_link_desc"
+            v-model="link_desc_third"
+          />
           <label for="input_link">Ссылка:</label>
           <input
             placeholder="https://developer.mozilla.org/"
             type="text"
             class="input_link"
+            v-model="link_third"
           />
           <button
             type="button"
@@ -248,12 +259,18 @@
 
         <div class="link_group" v-if="linkC">
           <label for="input_link_desc">Описание ссылки:</label>
-          <input placeholder="MDN" type="text" class="input_link_desc" />
+          <input
+            placeholder="MDN"
+            type="text"
+            class="input_link_desc"
+            v-model="link_desc_fourth"
+          />
           <label for="input_link">Ссылка:</label>
           <input
             placeholder="https://developer.mozilla.org/"
             type="text"
             class="input_link"
+            v-model="link_fourth"
           />
           <button
             type="button"
@@ -273,12 +290,18 @@
 
         <div class="link_group" v-if="linkD">
           <label for="input_link_desc">Описание ссылки:</label>
-          <input placeholder="MDN" type="text" class="input_link_desc" />
+          <input
+            placeholder="MDN"
+            type="text"
+            class="input_link_desc"
+            v-model="link_desc_fifth"
+          />
           <label for="input_link">Ссылка:</label>
           <input
             placeholder="https://developer.mozilla.org/"
             type="text"
             class="input_link"
+            v-model="link_fifth"
           />
         </div>
         <button class="send" type="submit" value="Submit">send</button>
@@ -303,6 +326,15 @@ export default {
       extra: "",
       link_desc: "",
       link: "",
+      link_desc_second: "",
+      link_second: "",
+      link_desc_third: "",
+      link_third: "",
+      link_desc_fourth: "",
+      link_fourth: "",
+      link_desc_fifth: "",
+      link_fifth: "",
+
       submit_allow: true,
       moreA: false,
       moreB: false,
@@ -338,18 +370,40 @@ export default {
         qa_group: this.qa_group,
         question: this.question,
         answer: this.answer,
+        answer_second: this.answer_second,
+        answer_third: this.answer_third,
+        answer_fourth: this.answer_fourth,
         code: this.code,
         extra: this.extra,
         link_desc: this.link_desc,
         link: this.link,
+        link_desc_second: this.link_desc_second,
+        link_second: this.link_second,
+        link_desc_third: this.link_desc_third,
+        link_third: this.link_third,
+        link_desc_fourth: this.link_desc_fourth,
+        link_fourth: this.link_fourth,
+        link_desc_fifth: this.link_desc_fifth,
+        link_fifth: this.link_fifth,
       });
-      (this.qa_group = ""),
+      (this.qa_group = "Misc"),
         (this.question = ""),
         (this.answer = ""),
+        (this.answer_second = ""),
+        (this.answer_third = ""),
+        (this.answer_fourth = ""),
         (this.code = ""),
         (this.extra = ""),
         (this.link_desc = ""),
         (this.link = ""),
+        (this.link_desc_second = ""),
+        (this.link_second = ""),
+        (this.link_desc_third = ""),
+        (this.link_third = ""),
+        (this.link_desc_fourth = ""),
+        (this.link_fourth = ""),
+        (this.link_desc_fifth = ""),
+        (this.link_fifth = ""),
         (this.submitted = true);
       this.snackbar = false;
     },
