@@ -316,7 +316,7 @@
             v-model="link_fifth"
           />
         </div>
-        <button class="send" type="submit" value="Submit">send</button>
+        <button class="send" type="submit" value="Submit">Отправить</button>
       </form>
     </div>
   </div>
@@ -488,6 +488,10 @@ export default {
   font-size: 24px;
 }
 
+.contact-form h2 {
+  font-size: inherit;
+}
+
 .qa_group,
 .input_question,
 .textarea_answer,
@@ -502,7 +506,14 @@ export default {
   margin: 10px;
   background-color: rgba(80, 80, 80, 0.397);
   cursor: pointer;
+
+  font-size: 20px;
 }
+
+.add_q_a_code:hover {
+  color: #ffcc02;
+}
+
 .send {
   margin: 10px;
   font-size: 24px;
@@ -525,6 +536,7 @@ export default {
 
 label {
   margin-bottom: 10px;
+  font-size: 20px;
 }
 .contact-form {
   display: flex;

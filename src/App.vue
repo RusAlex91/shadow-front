@@ -98,7 +98,7 @@ __) |  | /--\ |__/ \__/ |/\|
 
               <p>You can search database</p>
             </div>
-            <div class="search-Input-Wrapper">
+            <div class="search-input-wrapper">
               <input
                 @click="
                   serachInput = '';
@@ -110,7 +110,10 @@ __) |  | /--\ |__/ \__/ |/\|
               />
               <button
                 class="query-Close-Button"
-                @click="searhHidden = false"
+                @click="
+                  searhHidden = false;
+                  serachInput = '';
+                "
               ></button>
             </div>
             <Search
@@ -398,7 +401,7 @@ body {
   max-width: 500px;
 }
 
-.search-Input-Wrapper {
+.search-input-wrapper {
   display: flex;
   align-items: center;
   position: relative;
@@ -595,7 +598,12 @@ button {
 
   .search_input {
     font-size: 16px;
-    width: 250px;
+    width: 180px;
+  }
+
+  .contact-form {
+    font-size: 16px;
+    width: 280px;
   }
 }
 
@@ -689,6 +697,11 @@ button {
 
   .search_input {
     font-size: 16px;
+    width: 250px;
+  }
+  .contact-form {
+    font-size: 16px;
+    width: 300px;
   }
 }
 
@@ -759,6 +772,11 @@ button {
   .search_input {
     font-size: 20px;
   }
+
+  .contact-form {
+    font-size: 20px;
+    width: 400px;
+  }
 }
 
 @media only screen and (max-width: 1023px) and (min-width: 801px) {
@@ -814,6 +832,11 @@ button {
   .search_input {
     font-size: 24px;
   }
+
+  .contact-form {
+    font-size: 24px;
+    width: 400px;
+  }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -838,6 +861,11 @@ button {
 
   .pre-below-320 {
     display: none;
+  }
+
+  .contact-form {
+    font-size: 36px;
+    width: 400px;
   }
 }
 </style>
