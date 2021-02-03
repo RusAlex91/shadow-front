@@ -320,7 +320,7 @@ export default {
 
 .main-container {
   /* border: 1px solid tomato; */
-  min-width: 1120px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -744,6 +744,7 @@ button {
   }
   .main-container {
     background-color: #0a0600;
+    width: 40%;
   }
   .navigation {
     font-size: 24px;

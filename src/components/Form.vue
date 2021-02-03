@@ -392,9 +392,9 @@ export default {
         answer_third: this.answer_third,
         answer_fourth: this.answer_fourth,
         code: this.code,
-        code_second: "",
-        code_third: "",
-        code_fourth: "",
+        code_second: this.code_second,
+        code_third: this.code_third,
+        code_fourth: this.code_fourth,
         extra: this.extra,
         link_desc: this.link_desc,
         link: this.link,
@@ -490,6 +490,11 @@ export default {
 
 .contact-form h2 {
   font-size: inherit;
+}
+
+.contact-form h2:hover {
+  color: #ffcc02;
+  cursor: pointer;
 }
 
 .qa_group,

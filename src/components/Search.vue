@@ -1,31 +1,98 @@
 <template>
   <transition name="fade">
     <div class="main-text-box main-text-box_color" v-if="searhHidden">
+      <input
+        type="checkbox"
+        id="validated_search"
+        value="valid"
+        v-model="user_send_search"
+      />
+
+      <label class="validated_label" for="validated_search"
+        >Показать присланные вопросы</label
+      >
       <div
         v-show="searchText.length < 5"
         v-for="qa in searchText"
         :key="qa.id"
         class="question-answer-box"
       >
-        <transition name="fade">
-          <p @click="openbox(qa)" class="question-answer-box_question">
+        <div class="validationIf" v-if="user_send_search == qa.user_send">
+          <p
+            @click="
+              openbox(qa);
+              scrollToElement({ behavior: 'smooth' });
+            "
+            class="question-answer-box_question"
+          >
             >>> {{ qa.question }}
           </p>
-        </transition>
-        <div v-show="qa.seen">
-          <p class="question-answer-box_answer">
-            {{ qa.answer }}
-          </p>
-          <div class="code-box" v-if="qa.code != ''">
-            <span class="code-box-code" v-html="qa.code"> </span>
-          </div>
+          <transition name="fade">
+            <div v-show="qa.seen">
+              <p class="question-answer-box_answer">
+                {{ qa.answer }}
+              </p>
+              <div class="code-box" v-if="qa.code != ''">
+                <span class="code-box-code">{{ qa.code }} </span>
+              </div>
+              <p class="question-answer-box_answer">
+                {{ qa.answer_second }}
+              </p>
+              <div class="code-box" v-if="qa.code_second != ''">
+                <span class="code-box-code"> {{ qa.code_second }} </span>
+              </div>
+              <p class="question-answer-box_answer">
+                {{ qa.answer_third }}
+              </p>
+              <div class="code-box" v-if="qa.code_third != ''">
+                <span class="code-box-code"> {{ qa.code_third }} </span>
+              </div>
+              <p class="question-answer-box_answer">
+                {{ qa.answer_fourth }}
+              </p>
+              <div class="code-box" v-if="qa.code_fourth != ''">
+                <span class="code-box-code">{{ qa.code_fourth }} </span>
+              </div>
 
-          <div class="links" v-for="link in qa.links" :key="link">
-            <span class="sourceLinks">- </span>
-            <a v-bind:href="link.link" class="link">{{ link.title }}</a>
-          </div>
-          <span class="extra"> Дополнительно: {{ qa.extra }} </span>
-          <p class="question-answer-box_close" @click="openbox(qa)">Закрыть</p>
+              <div class="links">
+                <div class="link_wrapper" v-if="qa.link_desc != ''">
+                  <span class="sourceLinks">- </span>
+                  <a v-bind:href="qa.link" class="link">{{ qa.link_desc }}</a>
+                </div>
+                <div class="link_wrapper" v-if="qa.link_desc_second != ''">
+                  <span class="sourceLinks">- </span>
+                  <a v-bind:href="qa.link_second" class="link">{{
+                    qa.link_desc_second
+                  }}</a>
+                </div>
+
+                <div class="link_wrapper" v-if="qa.link_desc_third != ''">
+                  <span class="sourceLinks">- </span>
+                  <a v-bind:href="qa.link_third" class="link">{{
+                    qa.link_desc_third
+                  }}</a>
+                </div>
+
+                <div class="link_wrapper" v-if="qa.link_desc_fourth != ''">
+                  <span class="sourceLinks">- </span>
+                  <a v-bind:href="qa.link_fourth" class="link">{{
+                    qa.link_desc_fourth
+                  }}</a>
+                </div>
+
+                <div class="link_wrapper" v-if="qa.link_desc_fifth != ''">
+                  <span class="sourceLinks">- </span>
+                  <a v-bind:href="qa.link_fifth" class="link">{{
+                    qa.link_desc_fifth
+                  }}</a>
+                </div>
+              </div>
+              <span class="extra"> Дополнительно: {{ qa.extra }} </span>
+              <p class="question-answer-box_close" @click="openbox(qa)">
+                Закрыть
+              </p>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -45,6 +112,7 @@ export default {
       answerHidden: false,
       // message: `hello my ${HtmlAnswers[0].question}!`,
       dynamicList: [],
+      user_send_search: false,
     };
   },
   computed: {},
