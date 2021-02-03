@@ -325,7 +325,6 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 1100px;
 }
 
 .flex-wrapper {
@@ -528,17 +527,17 @@ button {
     margin-bottom: 60px;
   }
   .header-underline {
-    font-size: 9px;
+    font-size: 8px;
     margin-right: 6px;
   }
   .greeting-box {
-    font-size: 9px;
+    font-size: 8px;
   }
   .message-1 {
     margin-bottom: 0px;
   }
   .greeting-box_message-wrapper {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .middle-text-container {
@@ -592,6 +591,7 @@ button {
   .code-box-code {
     font-size: 16px;
   }
+
   .question-answer-box_close {
     font-size: 16px;
   }

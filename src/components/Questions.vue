@@ -153,6 +153,7 @@ export default {
   /* margin-left: 25px; */
   /* background: rgb(118, 101, 35); */
   /* background: linear-gradient(184deg, rgba(118, 101, 35, 0.5) 0%, rgba(118, 101, 35, 0.21332282913165268) 100%); */
+  margin-top: 20px;
 }
 
 #validated {
@@ -161,7 +162,7 @@ export default {
 }
 
 .validated_label {
-  margin-left: 5px;
+  margin: 10px;
 }
 
 .middle-text-container {
@@ -192,6 +193,7 @@ export default {
 .code-box {
   border: 4px double #493b05;
   width: 50%;
+  word-wrap: break-word;
 }
 
 .code-box-code {

@@ -1,16 +1,18 @@
 <template>
   <transition name="fade">
     <div class="main-text-box main-text-box_color" v-if="searhHidden">
-      <input
-        type="checkbox"
-        id="validated_search"
-        value="valid"
-        v-model="user_send_search"
-      />
+      <div class="validated_search_wrapper">
+        <input
+          type="checkbox"
+          id="validated_search"
+          value="valid"
+          v-model="user_send_search"
+        />
 
-      <label class="validated_label" for="validated_search"
-        >Показать присланные вопросы</label
-      >
+        <label class="validated_label" for="validated_search"
+          >Показать присланные вопросы</label
+        >
+      </div>
       <div
         v-show="searchText.length < 5"
         v-for="qa in searchText"
@@ -33,25 +35,33 @@
                 {{ qa.answer }}
               </p>
               <div class="code-box" v-if="qa.code != ''">
-                <span class="code-box-code">{{ qa.code }} </span>
+                <span class="code-box-code_search code-box-code_color"
+                  >{{ qa.code }}
+                </span>
               </div>
               <p class="question-answer-box_answer">
                 {{ qa.answer_second }}
               </p>
               <div class="code-box" v-if="qa.code_second != ''">
-                <span class="code-box-code"> {{ qa.code_second }} </span>
+                <span class="code-box-code_search code-box-code_color">
+                  {{ qa.code_second }}
+                </span>
               </div>
               <p class="question-answer-box_answer">
                 {{ qa.answer_third }}
               </p>
               <div class="code-box" v-if="qa.code_third != ''">
-                <span class="code-box-code"> {{ qa.code_third }} </span>
+                <span class="code-box-code_search code-box-code_color">
+                  {{ qa.code_third }}
+                </span>
               </div>
               <p class="question-answer-box_answer">
                 {{ qa.answer_fourth }}
               </p>
               <div class="code-box" v-if="qa.code_fourth != ''">
-                <span class="code-box-code">{{ qa.code_fourth }} </span>
+                <span class="code-box-code_search code-box-code_color"
+                  >{{ qa.code_fourth }}
+                </span>
               </div>
 
               <div class="links">
@@ -125,7 +135,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style >
+<style scoped>
 /* animations */
 .fade-enter-active,
 .fade-leave-active {
@@ -136,6 +146,14 @@ export default {
 }
 
 /*  */
+.validated_search {
+  margin-left: 5px;
+  margin-top: 10px;
+}
+
+.validated_search_wrapper {
+  margin: 10px;
+}
 
 .main-text-box {
   font-family: AnonymousPro;
@@ -146,7 +164,6 @@ export default {
 }
 
 .main-text-box_color {
-  color: rgba(127, 255, 212, 0.863);
 }
 
 .middle-text-container {
@@ -166,5 +183,20 @@ export default {
 
 .question-answer-box_close {
   cursor: pointer;
+}
+
+.code-box-code_color {
+  color: rgba(69, 163, 132, 0.863);
+}
+
+.code-box {
+  word-wrap: break-word;
+}
+
+.code-box-code_search {
+  display: block;
+  font-size: 20px;
+  white-space: pre-line;
+  line-height: 120%;
 }
 </style>

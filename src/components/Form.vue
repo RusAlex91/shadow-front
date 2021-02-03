@@ -490,6 +490,7 @@ export default {
 
 .contact-form h2 {
   font-size: inherit;
+  margin-top: 50px;
 }
 
 .contact-form h2:hover {
