@@ -166,8 +166,11 @@ __) |  | /--\ |__/ \__/ |/\|
                 >Interview</span
               >
             </nav>
-
-            <Questions :qaText="filteredAnswers()"></Questions>
+            <Test class="quiz-test" v-if="selected == 'test'"></Test>
+            <Questions
+              v-if="selected != 'test'"
+              :qaText="filteredAnswers()"
+            ></Questions>
             <Form></Form>
           </div>
         </transition>
@@ -180,6 +183,7 @@ __) |  | /--\ |__/ \__/ |/\|
 import Questions from "./components/Questions.vue";
 import Search from "./components/Search.vue";
 import Form from "./components/Form";
+import Test from "./components/Test";
 // import Answers from "./assets/Answers";
 
 export default {
@@ -198,6 +202,7 @@ export default {
     Questions,
     Search,
     Form,
+    Test,
   },
   methods: {
     toggleMenu: function () {
