@@ -166,11 +166,18 @@ __) |  | /--\ |__/ \__/ |/\|
                 >Interview</span
               >
             </nav>
-            <Test class="quiz-test" v-if="selected == 'test'"></Test>
+            <TestMain class="quiz-test" v-if="selected == 'test'"> </TestMain>
             <Questions
-              v-if="selected != 'test'"
+              v-if="selected != 'test' && selected != 'interview'"
               :qaText="filteredAnswers()"
             ></Questions>
+
+            <Interview
+              :int_q="answers"
+              class="quiz-test"
+              v-if="selected == 'interview'"
+            >
+            </Interview>
             <Form></Form>
           </div>
         </transition>
@@ -183,10 +190,15 @@ __) |  | /--\ |__/ \__/ |/\|
 import Questions from "./components/Questions.vue";
 import Search from "./components/Search.vue";
 import Form from "./components/Form";
-import Test from "./components/Test";
+import TestMain from "./components/Test_main.vue";
+import Interview from "./components/Interview.vue";
+
 // import Answers from "./assets/Answers";
 
 export default {
+  setup() {
+    return {};
+  },
   name: "App",
   data() {
     return {
@@ -202,7 +214,8 @@ export default {
     Questions,
     Search,
     Form,
-    Test,
+    TestMain,
+    Interview,
   },
   methods: {
     toggleMenu: function () {
@@ -269,14 +282,13 @@ export default {
         var arrayQ = [];
         querySnapshot.forEach((doc) => {
           var key = doc.id;
-          console.log(key);
+
           var arr = doc.data();
           arr.id = key;
 
           arrayQ.push(arr);
         });
         this.answers = arrayQ;
-        console.log(arrayQ);
       });
   },
 };
@@ -474,7 +486,7 @@ button {
   width: 150px;
   height: 68px;
   border: 4px inset #c8a207;
-  border-bottom: none;
+
   margin-left: 7px;
   /* border-top-right-radius: 50px; */
   text-decoration: underline;
@@ -569,7 +581,6 @@ button {
     width: 300px;
     height: 60px;
 
-    border-bottom: none;
     margin-left: 3px;
     border: 2px inset #c8a207;
     border-bottom: 2px inset #c8a207;
@@ -669,7 +680,6 @@ button {
     width: 300px;
     height: 60px;
 
-    border-bottom: none;
     margin-left: 3px;
     border: 2px inset #c8a207;
     border-bottom: 2px inset #c8a207;
@@ -762,7 +772,6 @@ button {
     width: 290px;
     height: 60px;
 
-    border-bottom: none;
     margin-left: 3px;
     border: 2px inset #c8a207;
     border-bottom: 2px inset #c8a207;
@@ -825,7 +834,7 @@ button {
     width: 240px;
     height: 60px;
     border: 4px inset #c8a207;
-    border-bottom: none;
+
     margin-left: 7px;
     border: 4px inset #c8a207;
     border-bottom: 4px inset #c8a207;
