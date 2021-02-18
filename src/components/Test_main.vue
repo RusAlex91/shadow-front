@@ -1,7 +1,30 @@
 <template>
   <div>
+    <h2 class="tests_header">Выберите категорию:</h2>
+    <div class="navigation">
+      <span
+        v-on:click="selected = 'html'"
+        v-bind:class="{ navigation_active: selected == 'html' }"
+        >HTML</span
+      >
+      <span
+        v-on:click="selected = 'css'"
+        v-bind:class="{ navigation_active: selected == 'css' }"
+        >CSS</span
+      >
+      <span
+        v-on:click="selected = 'js'"
+        v-bind:class="{ navigation_active: selected == 'js' }"
+        >JS</span
+      ><span
+        v-on:click="selected = 'other'"
+        v-bind:class="{ navigation_active: selected == 'other' }"
+        >Other</span
+      >
+    </div>
+    <h3 class="tests_header">Выберите тест:</h3>
+
     <div class="test_list">
-      <h2 class="tests_header">Выберите тест:</h2>
       <div v-for="item in tests_name" :key="item.test_name">
         <p
           v-if="!show_test"
@@ -21,7 +44,7 @@
         </div>
       </div>
     </div>
-    <button @click="show_test_form = !show_test_form">
+    <button class="test_form_button" @click="show_test_form = !show_test_form">
       Submit a Quiz-Test
     </button>
     <TestSubmitForm v-if="show_test_form"></TestSubmitForm>
@@ -39,6 +62,7 @@ export default {
       filterItem: "",
       show_test: false,
       show_test_form: false,
+      selected: undefined,
     };
   },
   components: {
@@ -133,9 +157,16 @@ export default {
 <style >
 .test_list {
   width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.test_item {
+.test_list div {
+  margin: 5px;
+}
+
+.test_list .test_item {
   font-size: 24px;
 }
 .tests_header {
@@ -149,6 +180,38 @@ export default {
 .test_item:hover {
   cursor: pointer;
   color: tomato;
+  background-color: rgba(119, 102, 35, 0.3);
+}
+.test_form_button {
+  margin-bottom: 20px;
+}
+
+.navigation {
+  font-size: 38px;
+  display: flex;
+  margin-right: 31px;
+  flex-wrap: wrap;
+  /* width: 800px; */
+}
+.navigation span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 68px;
+  border: 4px inset #c8a207;
+
+  margin-left: 7px;
+  /* border-top-right-radius: 50px; */
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.navigation span:hover {
+  color: tomato;
+}
+.navigation_active {
   background-color: rgba(119, 102, 35, 0.3);
 }
 </style>

@@ -1,0 +1,63 @@
+[debug] [2021-02-16T08:14:52.718Z] ----------------------------------------------------------------------
+[debug] [2021-02-16T08:14:52.719Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\A\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2021-02-16T08:14:52.720Z] CLI Version:   9.3.0
+[debug] [2021-02-16T08:14:52.720Z] Platform:      win32
+[debug] [2021-02-16T08:14:52.720Z] Node Version:  v13.13.0
+[debug] [2021-02-16T08:14:52.724Z] Time:          Tue Feb 16 2021 11:14:52 GMT+0300 (Москва, стандартное время)
+[debug] [2021-02-16T08:14:52.724Z] ----------------------------------------------------------------------
+[debug] [2021-02-16T08:14:52.724Z] 
+[debug] [2021-02-16T08:14:52.726Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2021-02-16T08:14:52.739Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-02-16T08:14:52.739Z] > authorizing via signed-in user
+[debug] [2021-02-16T08:14:52.740Z] [iam] checking project shadow-front-40495 for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update"]
+[debug] [2021-02-16T08:14:52.741Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-02-16T08:14:52.741Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-02-16T08:14:58.115Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-02-16T08:14:58.115Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2021-02-16T08:15:13.783Z] [iam] error while checking permissions, command may fail: FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2021-02-16T08:15:13.783Z] > refreshing access token with scopes: []
+[debug] [2021-02-16T08:15:13.783Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-02-16T08:15:28.915Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","date":"Tue, 16 Feb 2021 08:15:29 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-02-16T08:15:28.928Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/shadow-front-40495 [none]
+[debug] [2021-02-16T08:15:47.449Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/shadow-front-40495 200
+[debug] [2021-02-16T08:15:47.449Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/shadow-front-40495 {"projectId":"shadow-front-40495","projectNumber":"271846309827","displayName":"shadow-front","name":"projects/shadow-front-40495","resources":{"hostingSite":"shadow-front-40495","realtimeDatabaseInstance":"shadow-front-40495-default-rtdb","storageBucket":"shadow-front-40495.appspot.com","locationId":"europe-west"},"state":"ACTIVE"}
+[debug] [2021-02-16T08:15:47.450Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/shadow-front-40495 [none]
+[debug] [2021-02-16T08:15:47.661Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/shadow-front-40495 200
+[debug] [2021-02-16T08:15:47.661Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/shadow-front-40495 {"projectId":"shadow-front-40495","projectNumber":"271846309827","displayName":"shadow-front","name":"projects/shadow-front-40495","resources":{"hostingSite":"shadow-front-40495","realtimeDatabaseInstance":"shadow-front-40495-default-rtdb","storageBucket":"shadow-front-40495.appspot.com","locationId":"europe-west"},"state":"ACTIVE"}
+[info] 
+[info] === Deploying to 'shadow-front-40495'...
+[info] 
+[info] i  deploying database, firestore, hosting 
+[info] i  database: checking rules syntax... 
+[debug] [2021-02-16T08:15:47.666Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-02-16T08:15:47.666Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-02-16T08:15:47.806Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Tue, 16 Feb 2021 08:15:48 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-02-16T08:15:47.818Z] >>> HTTP REQUEST GET https://firebasedatabase.googleapis.com/v1beta/projects/shadow-front-40495/locations/-/instances/shadow-front-40495-default-rtdb  
+ 
+[debug] [2021-02-16T08:15:49.280Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 16 Feb 2021 08:15:50 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-02-16T08:15:49.281Z] >>> HTTP REQUEST PUT https://shadow-front-40495-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "now < 1614373200000",  // 2021-2-27
+    ".write": "now < 1614373200000",  // 2021-2-27
+  }
+}
+[debug] [2021-02-16T08:16:00.067Z] <<< HTTP RESPONSE 200 {"server":"nginx","date":"Tue, 16 Feb 2021 08:16:00 GMT","content-type":"application/json; charset=utf-8","content-length":"15","connection":"keep-alive","access-control-allow-origin":"*","cache-control":"no-cache","strict-transport-security":"max-age=31556926; includeSubDomains; preload"}
+[info] +  database: rules syntax for database shadow-front-40495-default-rtdb is valid 
+[info] i  firestore: reading indexes from firestore.indexes.json... 
+[info] i  cloud.firestore: checking firestore.rules for compilation errors... 
+[debug] [2021-02-16T08:16:00.080Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/shadow-front-40495:test  
+ {"source":{"files":[{"name":"firestore.rules","content":"rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write: if\n          request.time < timestamp.date(2021, 2, 27);\n    }\n  }\n}"}]}}
+[debug] [2021-02-16T08:16:01.137Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Tue, 16 Feb 2021 08:16:01 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  cloud.firestore: rules file firestore.rules compiled successfully 
+[debug] [2021-02-16T08:16:01.140Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/shadow-front-40495/versions  
+ {"config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2021-02-16T08:16:33.329Z] Error: getaddrinfo ENOTFOUND firebasehosting.googleapis.com
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:66:26)
+[error] 
+[error] Error: Server Error. getaddrinfo ENOTFOUND firebasehosting.googleapis.com
