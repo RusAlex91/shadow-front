@@ -305,6 +305,25 @@ export default {
   src: url(fonts/AnonymousPro-Regular.ttf) format("truetype");
 }
 
+input,
+textarea,
+select {
+  font-family: AnonymousPro;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+option {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+input,
+textarea,
+select,
+option {
+  font-size: 15px;
+}
+
 #app {
   background-color: #0a0600;
 }

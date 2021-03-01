@@ -1,6 +1,11 @@
-<template id="contact-form-template">
-  <div class="contact-form">
-    <h2 @click="submit_allow = !submit_allow">Submit a QA in database</h2>
+<template >
+  <div>
+    <button
+      class="open_test_btn"
+      @click="(submit_allow = !submit_allow), formClose()"
+    >
+      Submit a QA in database
+    </button>
     <div class="form" v-if="submit_allow">
       <form class="contact-form" @submit.prevent="saveContactMessage">
         <label for="qa_group">Выберите категорию вопроса:</label>
@@ -23,12 +28,12 @@
             v-model="question"
             @blur="validate_question_input"
           />
-          <p
+          <span
             class="invalid_question_input-text"
             v-if="validate_question === 'invalid'"
           >
-            Введите вопрос
-          </p>
+            Обязательно
+          </span>
         </div>
 
         <div
@@ -44,7 +49,7 @@
             @blur="validate_answer_input"
           ></textarea>
 
-          <p v-if="validate_answer === 'invalid'">Введите ответ</p>
+          <span v-if="validate_answer === 'invalid'">Обязательно</span>
 
           <label class="textarea_code-label" for="textarea_code">Код:</label>
           <textarea
@@ -52,7 +57,7 @@
             class="textarea_code"
             v-model="code"
           ></textarea>
-          <p v-if="validate_answer === 'invalid'">Опционально введите код</p>
+          <span v-if="validate_answer === 'invalid'">Опционально</span>
         </div>
 
         <button
@@ -80,7 +85,7 @@
             @blur="validate_answer_input"
           ></textarea>
 
-          <p v-if="validate_answer_second === 'invalid'">Введите ответ</p>
+          <span v-if="validate_answer_second === 'invalid'">Обязательно</span>
 
           <label class="textarea_code-label" for="textarea_code">Код:</label>
           <textarea
@@ -89,9 +94,7 @@
             v-model="code_second"
           ></textarea>
 
-          <p v-if="validate_answer_second === 'invalid'">
-            Опционально введите код
-          </p>
+          <span v-if="validate_answer_second === 'invalid'"> Опционально </span>
           <button
             type="button"
             class="add_q_a_code"
@@ -119,7 +122,7 @@
             @blur="validate_answer_input"
           ></textarea>
 
-          <p v-if="validate_answer_third === 'invalid'">Введите ответ</p>
+          <span v-if="validate_answer_third === 'invalid'">Обязательно</span>
 
           <label class="textarea_code-label" for="textarea_code">Код:</label>
           <textarea
@@ -128,9 +131,7 @@
             v-model="code_third"
           ></textarea>
 
-          <p v-if="validate_answer_third === 'invalid'">
-            Опционально введите код
-          </p>
+          <span v-if="validate_answer_third === 'invalid'"> Опционально </span>
           <button
             type="button"
             class="add_q_a_code"
@@ -158,7 +159,7 @@
             @blur="validate_answer_input"
           ></textarea>
 
-          <p v-if="validate_answer_fourth === 'invalid'">Введите ответ</p>
+          <span v-if="validate_answer_fourth === 'invalid'">Обязательно</span>
 
           <label class="textarea_code-label" for="textarea_code">Код:</label>
           <textarea
@@ -167,9 +168,7 @@
             v-model="code_fourth"
           ></textarea>
 
-          <p v-if="validate_answer_fourth === 'invalid'">
-            Опционально введите код
-          </p>
+          <span v-if="validate_answer_fourth === 'invalid'"> Опционально </span>
         </div>
         <!-- extra  -->
         <label for="textarea_extra">Дополнительно:</label>
@@ -456,6 +455,7 @@ export default {
         this.validate_question = "valid";
       }
     },
+
     validate_answer_input: function () {
       if (this.answer.trim() === "") {
         this.validate_answer = "invalid";
@@ -479,7 +479,20 @@ export default {
         this.validate_answer_fourth = "valid";
       }
     },
-    change_content: function () {},
+    formClose: function () {
+      var innerText = document.getElementsByClassName("open_test_btn")[0]
+        .innerHTML;
+
+      if (innerText == "Close form") {
+        innerText = document.getElementsByClassName(
+          "open_test_btn"
+        )[0].innerHTML = "Submit a QA in database";
+      } else {
+        innerText = document.getElementsByClassName(
+          "open_test_btn"
+        )[0].innerHTML = "Close form";
+      }
+    },
   },
 };
 </script>
@@ -488,14 +501,15 @@ export default {
   font-size: 24px;
 }
 
-.contact-form h2 {
-  font-size: inherit;
+.open_test_btn {
   margin-top: 50px;
-}
-
-.contact-form h2:hover {
-  color: #ffcc02;
+  font-size: 20px;
+  color: gold;
   cursor: pointer;
+  margin-bottom: 20px;
+}
+.open_test_btn:hover {
+  color: goldenrod;
 }
 
 .qa_group,
@@ -568,18 +582,20 @@ label {
   flex-direction: column;
 }
 
-.form-control_question p {
+.form-control_question span {
   font-size: 14px;
   color: yellow;
+  margin-bottom: 20px;
 }
 
-.form-control_answer p {
+.form-control_answer span {
   font-size: 14px;
   color: yellow;
+  margin-bottom: 20px;
 }
 
 .form-control_answer.invalid .textarea_code-label {
-  color: inherit;
+  color: yellow;
 }
 
 /* form validation */
@@ -590,9 +606,14 @@ label {
   color: red;
 }
 
-.form-control_answer.invalid input {
+.form-control_answer.invalid .textarea_answer {
   border-color: red;
 }
+
+.form-control_answer.invalid .textarea_code {
+  border-color: yellow;
+}
+
 .form-control_answer.invalid label {
   color: red;
 }

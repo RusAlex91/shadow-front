@@ -229,7 +229,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .valid {
   color: green;
 }

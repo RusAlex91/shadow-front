@@ -1,53 +1,56 @@
 <template>
-  <div>
-    <h2 class="tests_header">Выберите категорию:</h2>
-    <div class="navigation">
-      <span
-        v-on:click="selected = 'html'"
-        v-bind:class="{ navigation_active: selected == 'html' }"
-        >HTML</span
-      >
-      <span
-        v-on:click="selected = 'css'"
-        v-bind:class="{ navigation_active: selected == 'css' }"
-        >CSS</span
-      >
-      <span
-        v-on:click="selected = 'js'"
-        v-bind:class="{ navigation_active: selected == 'js' }"
-        >JS</span
-      ><span
-        v-on:click="selected = 'other'"
-        v-bind:class="{ navigation_active: selected == 'other' }"
-        >Other</span
-      >
-    </div>
-    <h3 class="tests_header">Выберите тест:</h3>
-
-    <div class="test_list">
-      <div v-for="item in tests_name" :key="item.test_name">
-        <p
-          v-if="!show_test"
-          class="test_item"
-          @click="openbox(item, tests_name)"
+  <div class="tests_body">
+    <div>
+      <h2 class="tests_header">Выберите категорию:</h2>
+      <div class="navigation_test">
+        <span
+          v-on:click="(selected = 'html'), testSelect('HTML')"
+          v-bind:class="{ navigation_test_active: selected == 'html' }"
+          >HTML</span
         >
-          {{ item.test_name }}
-        </p>
-        <div v-if="item.seen">
-          <div>
-            <TestSub
-              :tests="filters(item)"
-              :test_name="item"
-              @clicked="onClickChild(item, tests_name)"
-            ></TestSub>
+        <span
+          v-on:click="(selected = 'css'), testSelect('CSS')"
+          v-bind:class="{ navigation_test_active: selected == 'css' }"
+          >CSS</span
+        >
+        <span
+          v-on:click="(selected = 'js'), testSelect('JS')"
+          v-bind:class="{ navigation_test_active: selected == 'js' }"
+          >JS</span
+        ><span
+          v-on:click="(selected = 'other'), testSelect('OTHER')"
+          v-bind:class="{ navigation_test_active: selected == 'other' }"
+          >Other</span
+        >
+      </div>
+      <h3 v-if="selected != undefined" class="tests_header">Выберите тест:</h3>
+
+      <div v-if="selected != undefined" class="test_list">
+        <div v-for="item in tests_name_filtered" :key="item.test_name">
+          <p
+            v-if="!show_test"
+            class="test_item"
+            @click="openbox(item, tests_name_filtered)"
+          >
+            {{ item.test_name }}
+          </p>
+          <div v-if="item.seen">
+            <div>
+              <TestSub
+                :tests="filters(item)"
+                :test_name="item"
+                @clicked="onClickChild(item, tests_name_filtered)"
+              ></TestSub>
+            </div>
           </div>
         </div>
       </div>
+
+      <TestSubmitForm v-if="show_test_form"></TestSubmitForm>
     </div>
     <button class="test_form_button" @click="show_test_form = !show_test_form">
       Submit a Quiz-Test
     </button>
-    <TestSubmitForm v-if="show_test_form"></TestSubmitForm>
   </div>
 </template>
 <script>
@@ -59,6 +62,7 @@ export default {
       tests: {},
       tests_quantity: null,
       tests_name: [],
+      tests_name_filtered: [],
       filterItem: "",
       show_test: false,
       show_test_form: false,
@@ -73,10 +77,10 @@ export default {
     showTest(data) {
       console.log("child component said login", data);
     },
-    onClickChild(item, tests_name) {
+    onClickChild(item, tests_name_filtered) {
       // this.show_test = value;
       // console.log(this.show_test); // someValue
-      this.openbox(item, tests_name);
+      this.openbox(item, tests_name_filtered);
     },
     showInput(index) {
       this.chosenExpenseId = index;
@@ -114,6 +118,15 @@ export default {
 
       // result = people.filter((o) => id_filter.includes(o.test_name));
     },
+    testSelect: function (selector) {
+      var abc = this.tests;
+      const filteredArr = abc.filter((item) => item.test_category == selector);
+      // console.log(filteredArr);
+      // console.log(this.tests_name);
+      console.log(this.tests);
+      console.log(filteredArr);
+      this.tests_name_filtered = filteredArr;
+    },
   },
   created() {
     this.$firebaseDatabase
@@ -128,6 +141,7 @@ export default {
           arr.id = key;
           arrayT.push(arr);
         });
+
         this.tests = arrayT;
 
         var resArr = [];
@@ -137,6 +151,8 @@ export default {
             var Obj = {};
             let item_1 = item.test_name;
             let item_2 = item.seen;
+            let item_3 = item.test_category;
+            Obj.test_category = item_3;
             Obj.test_name = item_1;
             Obj.seen = item_2;
             resArr.push(Obj);
@@ -154,7 +170,12 @@ export default {
 };
 </script>
 
-<style >
+<style>
+.tests_body {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
 .test_list {
   width: 80%;
   display: flex;
@@ -166,52 +187,51 @@ export default {
   margin: 5px;
 }
 
-.test_list .test_item {
-  font-size: 24px;
-}
 .tests_header {
   color: khaki;
 }
+.test_list .test_item {
+  font-size: 24px;
+}
+
 .test_item {
   border: 2px solid khaki;
   width: 100px;
   padding: 10px;
+  height: 50px;
+  text-align: center;
 }
 .test_item:hover {
   cursor: pointer;
-  color: tomato;
+  color: rgb(233, 178, 38);
   background-color: rgba(119, 102, 35, 0.3);
 }
 .test_form_button {
   margin-bottom: 20px;
 }
 
-.navigation {
-  font-size: 38px;
+.navigation_test {
+  font-size: 28px;
   display: flex;
   margin-right: 31px;
   flex-wrap: wrap;
-  /* width: 800px; */
 }
-.navigation span {
+.navigation_test span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
+  width: 110px;
   height: 68px;
-  border: 4px inset #c8a207;
-
+  border: 4px double #c8a207;
   margin-left: 7px;
-  /* border-top-right-radius: 50px; */
-  text-decoration: underline;
   cursor: pointer;
   margin-top: 20px;
 }
 
-.navigation span:hover {
-  color: tomato;
+.navigation_test span:hover {
+  color: gold;
 }
-.navigation_active {
+.navigation_test_active {
   background-color: rgba(119, 102, 35, 0.3);
 }
 </style>

@@ -19,8 +19,9 @@
         /></label>
       </div>
 
-      <label>Выберите группу вопросов:</label>
+      <label for="category_select">Выберите группу вопросов:</label>
       <select
+        class="category_select"
         @change="filterCategory(testCategorySelect)"
         v-model="testCategorySelect"
       >
@@ -28,10 +29,19 @@
           {{ test }}
         </option>
       </select>
-      <select :disabled="createTest" v-model="testName">
+      <label for="test_in_category_select">Выберите тест:</label>
+      <select
+        test_in_category_select
+        v-show="testCategorySelect != undefined"
+        :disabled="createTest"
+        v-model="testName"
+      >
         <option v-for="test in testsNames" :key="test">{{ test }}</option>
       </select>
-      <label>Вопрос: <input type="text" v-model="question" required /></label>
+
+      <label>Вопрос:</label>
+      <textarea type="text" v-model="question" required></textarea>
+
       <div class="answers">
         <!-- first -->
         <label>Ответ 1:<input type="text" v-model="option_1" /></label>
@@ -233,11 +243,15 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style >
 .answers {
   display: flex;
   flex-direction: column;
-  font-size: 20px;
+  font-size: 14px;
+}
+
+.answers > * {
+  margin-bottom: 15px;
 }
 
 .contact-form {
@@ -259,6 +273,9 @@ export default {
 .test-form {
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width: 400px;
+}
+.test-form > * {
+  margin-bottom: 15px;
 }
 </style>

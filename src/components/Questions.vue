@@ -1,5 +1,6 @@
 <template>
   <div class="main-text-box">
+    <button @click="print">Принт</button>
     <input type="checkbox" id="validated" value="valid" v-model="user_send" />
 
     <label class="validated_label" for="validated"
@@ -118,6 +119,10 @@ export default {
       if (el) {
         el.scrollIntoView(options);
       }
+    },
+    print: function () {
+      //повяснять как отдельный контент можно принтить
+      window.print();
     },
   },
 };
