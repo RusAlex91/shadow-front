@@ -1,13 +1,15 @@
 <template>
   <div class="main_test_box">
-    <div class="" v-for="(test, index) in tests" :key="test.id">
+    <div class="test_body" v-for="(test, index) in tests" :key="test.id">
       <div v-show="index === questionIndex">
-        <p>Question {{ index + 1 }} of {{ tests.length }}:</p>
+        <p>Вопрос {{ index + 1 }} из {{ tests.length }}:</p>
 
-        <p>{{ test.question }}</p>
-        <div v-if="empty_answer">
+        <p class="test_question">{{ test.question }}</p>
+        <div class="empty_answer" v-if="empty_answer">
           <p>Вы не выбрали ответ на вопрос</p>
-          <button @click="showAnswer(index)">Я знаю, покажи правильный</button>
+          <button class="empty_answer_btn" @click="showAnswer(index)">
+            Я знаю, покажи правильный
+          </button>
         </div>
 
         <form action="" class="test_case" v-on:submit.prevent="onSubmit">
@@ -19,7 +21,9 @@
               v-model="answer"
             />{{ test.option_1 }}</label
           >
-          <p v-show="label_option == 'option_1'">{{ test.extra }}</p>
+          <p class="test_extra" v-show="label_option == 'option_1'">
+            {{ test.extra }}
+          </p>
           <label class="option option_2">
             <input
               type="radio"
@@ -28,7 +32,9 @@
               v-model="answer"
             />{{ test.option_2 }}</label
           >
-          <p v-show="label_option == 'option_2'">{{ test.extra }}</p>
+          <p class="test_extra" v-show="label_option == 'option_2'">
+            {{ test.extra }}
+          </p>
           <label class="option option_3">
             <input
               type="radio"
@@ -37,7 +43,9 @@
               v-model="answer"
             />{{ test.option_3 }}</label
           >
-          <p v-show="label_option == 'option_3'">{{ test.extra }}</p>
+          <p class="test_extra" v-show="label_option == 'option_3'">
+            {{ test.extra }}
+          </p>
           <label class="option option_4">
             <input
               type="radio"
@@ -46,16 +54,24 @@
               v-model="answer"
             />{{ test.option_4 }}</label
           >
-          <p v-show="label_option == 'option_4'">{{ test.extra }}</p>
-          <button
-            class="submit_btn"
-            @click.prevent="checkAnswer(index, test.answer, test.id)"
-          >
-            Submit
-          </button>
-          <!-- <button v-if="questionIndex > 0" v-on:click="prev">Предыдущий</button> -->
-          <button v-on:click="next(tests.length)">Следующий</button>
-          <p>{{ answer }}</p>
+          <p class="test_extra" v-show="label_option == 'option_4'">
+            {{ test.extra }}
+          </p>
+          <div class="control_btns">
+            <button
+              class="submit_btn test_btn"
+              @click.prevent="checkAnswer(index, test.answer, test.id)"
+              :disabled="answered"
+              v-bind:class="{ btn_disabled: answered == true }"
+            >
+              Отправить
+            </button>
+
+            <!-- <button v-if="questionIndex > 0" v-on:click="prev">Предыдущий</button> -->
+            <button class="next_btn test_btn" v-on:click="next(tests.length)">
+              Следующий
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -64,7 +80,7 @@
       <h2 class="end_title">Тест {{ test_name.test_name }} завершен</h2>
       <p>Вы ответили на {{ score }} вопросов</p>
 
-      <button @click="endQuiz">Завершить тест</button>
+      <button class="test_btn" @click="endQuiz">Завершить тест</button>
     </div>
   </div>
 </template>
@@ -81,6 +97,7 @@ export default {
       test_index: null,
       test_length: null,
       show_test: false,
+      answered: false,
     };
   },
   props: {
@@ -118,9 +135,10 @@ export default {
         (this.empty_answer = false),
         (this.label_option = ""),
         (this.test_index = null),
-        (this.test_length = null);
-
-      this.$emit("clicked", false);
+        (this.test_length = null),
+        (this.show_test = false),
+        (this.answered = false),
+        this.$emit("endQuiz", false);
     },
     showAnswer(index) {
       var options = document.getElementsByClassName("option");
@@ -168,6 +186,7 @@ export default {
         this.empty_answer = true;
       } else {
         this.empty_answer = false;
+        this.answered = true;
       }
       if (!this.empty_answer) {
         if (this.tests[index].answer == this.answer) {
@@ -195,13 +214,12 @@ export default {
           }
         }
       }
-
-      document.getElementsByClassName("submit_btn")[0].disabled = true;
     }, // Перейти к следующему вопросу
     next: function (test_length) {
       if (this.answer == "") {
         this.empty_answer = true;
       } else {
+        this.answered = false;
         this.empty_answer = false;
         this.questionIndex++;
         this.label_option = "";
@@ -238,20 +256,100 @@ export default {
   color: tomato;
 }
 .main_test_box {
-  border-left: 4px solid brown;
-  border-right: 4px solid brown;
-  border-top: 4px solid brown;
-  width: 100%;
   font-family: AnonymousPro;
-
+  width: 500px;
   /* margin-left: 25px; */
   /* background: rgb(118, 101, 35); */
   /* background: linear-gradient(184deg, rgba(118, 101, 35, 0.5) 0%, rgba(118, 101, 35, 0.21332282913165268) 100%); */
-  margin-top: 20px;
+}
+
+.empty_answer {
+  font-size: 18px;
+  padding-bottom: 20px;
+}
+
+.empty_answer p {
+  color: rgb(216, 216, 16);
 }
 
 .test_case {
   display: flex;
   flex-direction: column;
+}
+
+.main_test_box {
+  font-size: 20px;
+}
+
+.test_question {
+}
+
+.option {
+  margin: 5px;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+label:hover {
+  cursor: pointer;
+  color: goldenrod;
+}
+
+.test_extra {
+  margin: 0px;
+  padding: 5px;
+  font-size: 18px;
+}
+
+.submit_btn {
+  margin-top: 40px;
+  cursor: pointer;
+}
+.next_btn {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.submit_btn:hover,
+.next_btn:hover {
+  background-color: rgba(134, 101, 18, 0.616);
+}
+
+.test_btn {
+  border: 1px solid gold;
+  width: 150px;
+  font-size: 18px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+.test_btn:hover {
+  background-color: rgba(134, 101, 18, 0.616);
+}
+
+.empty_answer_btn {
+  border-bottom: 1px solid gold;
+  cursor: pointer;
+}
+
+.empty_answer_btn:hover {
+  color: goldenrod;
+}
+
+.control_btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.test_btn.btn_disabled {
+  border: 1px solid gray;
+  color: gray;
+}
+
+.btn_disabled:hover {
+  background-color: rgba(128, 128, 128, 0.103);
 }
 </style>

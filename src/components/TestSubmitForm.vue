@@ -29,10 +29,28 @@
           {{ test }}
         </option>
       </select>
-      <label for="test_in_category_select">Выберите тест:</label>
+      <label v-show="testCategorySelect != undefined" for="test_in_diff_select"
+        >Выберите сложность:</label
+      >
       <select
-        test_in_category_select
+        class="test_in_diff_select"
         v-show="testCategorySelect != undefined"
+        :disabled="createTest"
+        v-model="testDifficulty"
+        @change="filterDiff(testDifficulty, testCategorySelect)"
+      >
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advansed">Advansed</option>
+        <option value="outher">Outher</option>
+      </select>
+
+      <label v-show="testDifficulty != undefined" for="test_in_category_select"
+        >Выберите тест:</label
+      >
+      <select
+        class="test_in_category_select"
+        v-show="testDifficulty != undefined"
         :disabled="createTest"
         v-model="testName"
       >
@@ -139,7 +157,9 @@ export default {
       option_4: "",
       testName: "",
       testCategory: undefined,
+      testDifficulty: undefined,
       testCategorySelect: undefined,
+      testDifficultySelect: undefined,
       answer: "",
       checkBox1: undefined,
       checkBox2: undefined,
@@ -207,7 +227,19 @@ export default {
           abcAr.push(element.test_name);
         }
       });
+      // this.testsNames = abcAr;
+    },
+    filterDiff: function (cat, main) {
+      debugger;
+      var abc = this.testGroupArr;
+      var abcAr = [];
+      abc.forEach((element) => {
+        if (element.test_difficulty == cat && element.test_category == main) {
+          abcAr.push(element.test_name);
+        }
+      });
       this.testsNames = abcAr;
+      console.log(this.testsNames);
     },
   },
   created() {
@@ -226,16 +258,17 @@ export default {
           let testCat = arr.test_category;
           arrayC.push(testCat);
 
-          let testCategory = arr.test_category;
+          let testDiff = arr.test_difficulty;
+          // let testCategory = arr.test_category;
           testGroup.test_name = testName;
-          testGroup.test_category = testCategory;
+          testGroup.test_category = testCat;
+          testGroup.test_difficulty = testDiff;
           testGroupArr.push(testGroup);
         });
         var uniq = [...new Set(arrayN)];
         var uniqC = [...new Set(arrayC)];
 
         this.testsNames = uniq;
-
         this.testCategory = uniqC;
         this.testGroupArr = testGroupArr;
         console.log(testGroupArr);
@@ -274,6 +307,9 @@ export default {
   display: flex;
   flex-direction: column;
   width: 400px;
+  margin-top: 60px;
+  border-top: 1px solid goldenrod;
+  padding-top: 10px;
 }
 .test-form > * {
   margin-bottom: 15px;

@@ -17,9 +17,7 @@
 
     <Questions v-if="interview_start" :qaText="int_q_random"></Questions>
 
-    <button v-if="interview_start" @click="interview_start = true">
-      Новое Интервью
-    </button>
+    <button v-if="interview_start" @click="randomQ()">Новое Интервью</button>
   </div>
 </template>
 

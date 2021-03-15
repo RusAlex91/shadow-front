@@ -1,7 +1,7 @@
 <template >
   <div>
     <button
-      class="open_test_btn"
+      class="open_form_btn"
       @click="(submit_allow = !submit_allow), formClose()"
     >
       Submit a QA in database
@@ -480,16 +480,16 @@ export default {
       }
     },
     formClose: function () {
-      var innerText = document.getElementsByClassName("open_test_btn")[0]
+      var innerText = document.getElementsByClassName("open_form_btn")[0]
         .innerHTML;
 
       if (innerText == "Close form") {
         innerText = document.getElementsByClassName(
-          "open_test_btn"
+          "open_form_btn"
         )[0].innerHTML = "Submit a QA in database";
       } else {
         innerText = document.getElementsByClassName(
-          "open_test_btn"
+          "open_form_btn"
         )[0].innerHTML = "Close form";
       }
     },
@@ -501,14 +501,14 @@ export default {
   font-size: 24px;
 }
 
-.open_test_btn {
+.open_form_btn {
   margin-top: 50px;
   font-size: 20px;
   color: gold;
   cursor: pointer;
   margin-bottom: 20px;
 }
-.open_test_btn:hover {
+.open_form_btn:hover {
   color: goldenrod;
 }
 

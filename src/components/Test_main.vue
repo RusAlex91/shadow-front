@@ -1,54 +1,98 @@
 <template>
   <div class="tests_body">
     <div>
-      <h2 class="tests_header">Выберите категорию:</h2>
+      <!-- <h2 class="tests_header">Выберите категорию:</h2> -->
       <div class="navigation_test">
-        <span
-          v-on:click="(selected = 'html'), testSelect('HTML')"
-          v-bind:class="{ navigation_test_active: selected == 'html' }"
-          >HTML</span
-        >
-        <span
-          v-on:click="(selected = 'css'), testSelect('CSS')"
-          v-bind:class="{ navigation_test_active: selected == 'css' }"
-          >CSS</span
-        >
-        <span
-          v-on:click="(selected = 'js'), testSelect('JS')"
-          v-bind:class="{ navigation_test_active: selected == 'js' }"
-          >JS</span
-        ><span
-          v-on:click="(selected = 'other'), testSelect('OTHER')"
-          v-bind:class="{ navigation_test_active: selected == 'other' }"
-          >Other</span
-        >
+        <div class="navigation_test_main">
+          <span
+            v-on:click="
+              (selected = 'html'), testSelect('HTML'), (showMoreJs = false)
+            "
+            v-bind:class="{ navigation_test_active: selected == 'html' }"
+            >HTML</span
+          >
+          <span
+            v-on:click="
+              (selected = 'css'), testSelect('CSS'), (showMoreJs = false)
+            "
+            v-bind:class="{ navigation_test_active: selected == 'css' }"
+            >CSS</span
+          >
+          <span
+            v-on:click="(selected = 'js'), (showMoreJs = true)"
+            v-bind:class="{ navigation_test_active: selected == 'js' }"
+            >JS</span
+          >
+          <span
+            v-on:click="
+              (selected = 'other'), testSelect('OTHER'), (showMoreJs = false)
+            "
+            v-bind:class="{ navigation_test_active: selected == 'other' }"
+            >Other</span
+          >
+        </div>
+        <div class="navigation_test_sub" v-show="showMoreJs">
+          <span
+            v-on:click="(sub_selected = 'basic'), testSelect('JS')"
+            v-bind:class="{ navigation_test_active: sub_selected == 'basic' }"
+            >Basic</span
+          >
+
+          <span
+            v-on:click="
+              (sub_selected = 'intermediate'), testSelect('JS', 'intermediate')
+            "
+            v-bind:class="{
+              navigation_test_active: sub_selected == 'intermediate',
+            }"
+            >Intermediate</span
+          >
+
+          <span
+            v-on:click="(sub_selected = 'advansed'), testSelect('JS')"
+            v-bind:class="{
+              navigation_test_active: sub_selected == 'advansed',
+            }"
+            >Advansed</span
+          >
+
+          <span
+            v-on:click="(sub_selected = 'Special'), testSelect('JS')"
+            v-bind:class="{ navigation_test_active: sub_selected == 'Special' }"
+            >Special</span
+          >
+        </div>
       </div>
-      <h3 v-if="selected != undefined" class="tests_header">Выберите тест:</h3>
+      <!-- <h3 v-if="selected != undefined" class="tests_header">Выберите тест:</h3> -->
 
       <div v-if="selected != undefined" class="test_list">
         <div v-for="item in tests_name_filtered" :key="item.test_name">
-          <p
-            v-if="!show_test"
-            class="test_item"
-            @click="openbox(item, tests_name_filtered)"
-          >
-            {{ item.test_name }}
-          </p>
+          <div class="test-wrapper">
+            <span
+              v-if="!show_test"
+              class="test_item"
+              @click="openbox(item, tests_name_filtered)"
+            >
+              {{ item.test_name }}
+            </span>
+          </div>
           <div v-if="item.seen">
             <div>
               <TestSub
                 :tests="filters(item)"
                 :test_name="item"
-                @clicked="onClickChild(item, tests_name_filtered)"
+                @endQuiz="onClickChild(item, tests_name_filtered)"
               ></TestSub>
             </div>
           </div>
         </div>
       </div>
-
       <TestSubmitForm v-if="show_test_form"></TestSubmitForm>
     </div>
-    <button class="test_form_button" @click="show_test_form = !show_test_form">
+    <button
+      class="open_form-test_btn"
+      @click="show_test_form = !show_test_form"
+    >
       Submit a Quiz-Test
     </button>
   </div>
@@ -67,6 +111,8 @@ export default {
       show_test: false,
       show_test_form: false,
       selected: undefined,
+      sub_selected: undefined,
+      showMoreJs: false,
     };
   },
   components: {
@@ -81,6 +127,7 @@ export default {
       // this.show_test = value;
       // console.log(this.show_test); // someValue
       this.openbox(item, tests_name_filtered);
+      this.show_test = false;
     },
     showInput(index) {
       this.chosenExpenseId = index;
@@ -118,13 +165,13 @@ export default {
 
       // result = people.filter((o) => id_filter.includes(o.test_name));
     },
-    testSelect: function (selector) {
+    testSelect: function (selector, sub_selector) {
       var abc = this.tests;
-      const filteredArr = abc.filter((item) => item.test_category == selector);
-      // console.log(filteredArr);
-      // console.log(this.tests_name);
-      console.log(this.tests);
-      console.log(filteredArr);
+      const filteredArr = abc.filter(
+        (item) =>
+          item.test_category == selector && item.test_difficulty == sub_selector
+      );
+
       this.tests_name_filtered = filteredArr;
     },
   },
@@ -175,12 +222,15 @@ export default {
   width: 90%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .test_list {
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100px;
 }
 
 .test_list div {
@@ -189,6 +239,7 @@ export default {
 
 .tests_header {
   color: khaki;
+  margin-top: 40px;
 }
 .test_list .test_item {
   font-size: 24px;
@@ -211,27 +262,55 @@ export default {
 }
 
 .navigation_test {
-  font-size: 28px;
+  font-size: 20px;
   display: flex;
   margin-right: 31px;
+  flex-direction: column;
+}
+.navigation_test_main,
+.navigation_test_sub {
+  display: flex;
   flex-wrap: wrap;
 }
-.navigation_test span {
+
+.navigation_test_main span,
+.navigation_test_sub span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 110px;
+  min-width: 110px;
+  padding-left: 3px;
+  padding-right: 3px;
   height: 68px;
-  border: 4px double #c8a207;
+  border: 4px double goldenrod;
   margin-left: 7px;
   cursor: pointer;
   margin-top: 20px;
+}
+
+.navigation_test_sub {
+  margin-bottom: 30px;
 }
 
 .navigation_test span:hover {
   color: gold;
 }
 .navigation_test_active {
+  background-color: rgba(119, 102, 35, 0.3);
+}
+
+.open_form-test_btn {
+  margin-top: 50px;
+  font-size: 20px;
+  color: gold;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.open_form-test_btn:hover {
+  color: goldenrod;
+}
+
+.navigation_test_active_always {
   background-color: rgba(119, 102, 35, 0.3);
 }
 </style>
